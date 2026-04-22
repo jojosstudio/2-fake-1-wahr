@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Die Chronik der Woche</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lora', serif; background-color: #f4f1eb; color: #1a1a1a; line-height: 1.8; }
+
+        .page { max-width: 860px; margin: 40px auto; background: #fff; padding: 60px 70px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); border: 1px solid #ddd; }
+
+        .masthead { text-align: center; border-bottom: 3px double #1a1a1a; padding-bottom: 18px; margin-bottom: 10px; }
+        .masthead h1 { font-family: 'Playfair Display', serif; font-size: 3.8rem; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+        .masthead-sub { font-size: 0.78rem; letter-spacing: 4px; text-transform: uppercase; color: #777; margin-top: 8px; }
+        .masthead-meta { display: flex; justify-content: space-between; font-size: 0.75rem; color: #888; border-top: 1px solid #ccc; margin-top: 10px; padding-top: 8px; }
+
+        nav { display: flex; justify-content: center; border-bottom: 2px solid #1a1a1a; margin-bottom: 30px; }
+        nav a { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #1a1a1a; text-decoration: none; padding: 8px 18px; border-right: 1px solid #ccc; }
+        nav a:first-child { border-left: 1px solid #ccc; }
+        nav a:hover { background: #1a1a1a; color: #fff; }
+
+        .quest { border: 2px solid #1a1a1a; padding: 28px 32px; margin-bottom: 40px; position: relative; background: #fffdf7; }
+        .quest-label { position: absolute; top: -13px; left: 28px; background: #1a1a1a; color: #fff; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; padding: 3px 12px; }
+        .quest h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 12px; }
+        .quest p { font-size: 0.95rem; color: #444; line-height: 1.7; margin-bottom: 12px; }
+        .quest-steps { list-style: none; margin-top: 14px; }
+        .quest-steps li { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; font-size: 0.92rem; color: #333; }
+        .quest-steps li .step-num { background: #1a1a1a; color: #fff; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.85rem; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .quest-steps a { color: #1a1a1a; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+        .quest-steps a:hover { color: #c9b47f; }
+        .quest-warning { margin-top: 18px; font-size: 0.82rem; font-style: italic; color: #888; border-top: 1px solid #ddd; padding-top: 12px; }
+
+        .article-headline { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; line-height: 1.15; text-align: center; margin-bottom: 10px; }
+        .article-deck { text-align: center; font-style: italic; font-size: 1.05rem; color: #555; margin-bottom: 16px; }
+        .article-meta { display: flex; justify-content: center; gap: 24px; font-size: 0.75rem; color: #888; letter-spacing: 1px; text-transform: uppercase; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 8px 0; margin-bottom: 30px; }
+        .article-body p { font-size: 1.05rem; margin-bottom: 1.5em; text-align: justify; hyphens: auto; }
+        .dropcap::first-letter { font-family: 'Playfair Display', serif; font-size: 4.2em; font-weight: 900; float: left; line-height: 0.75; margin-right: 6px; margin-top: 6px; color: #1a1a1a; }
+
+        .article-img { width: 100%; margin: 24px 0 8px; }
+        .article-img img { width: 100%; height: 320px; object-fit: cover; display: block; filter: grayscale(20%); }
+        .img-caption { font-size: 0.75rem; color: #888; font-style: italic; border-left: 3px solid #ccc; padding-left: 10px; margin-bottom: 24px; }
+        .section-rule { border: none; border-top: 1px solid #ccc; margin: 36px 0; }
+        .pull-quote { border-top: 3px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 18px 0; margin: 32px 0; text-align: center; }
+        .pull-quote p { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; color: #1a1a1a; margin: 0 !important; }
+
+        /* BUTTON */
+        #reveal-wrap { text-align: center; margin: 40px 0; }
+        #reveal-btn { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; background: #1a1a1a; color: #fff; border: none; padding: 16px 40px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; transition: background 0.2s; }
+        #reveal-btn:hover { background: #c9b47f; color: #1a1a1a; }
+        .reveal-hint { display: block; margin-top: 10px; font-size: 0.75rem; font-style: italic; color: #aaa; }
+
+        /* TWIST - standardmaessig versteckt */
+        #twist { display: none; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; }
+
+        footer { text-align: center; font-size: 0.7rem; color: #aaa; letter-spacing: 2px; text-transform: uppercase; border-top: 2px solid #1a1a1a; margin-top: 50px; padding-top: 16px; }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <div class="masthead">
+        <h1>Die Chronik der Woche</h1>
+        <p class="masthead-sub">Unabh&auml;ngige Spezialausgabe &middot; Medienkompetenz</p>
+        <div class="masthead-meta">
+            <span>Mittwoch, 22. April 2026</span>
+            <span>Ausgabe Nr. 14 &middot; Jahrgang 2026</span>
+            <span>Lesezeit: ca. 30 Minuten</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="#">Inland</a>
+        <a href="#">Welt</a>
+        <a href="#">Gesellschaft</a>
+        <a href="#">Digitales</a>
+        <a href="#">Meinung</a>
+        <a href="#">Kultur</a>
+    </nav>
+
+    <div class="quest">
+        <div class="quest-label">Ihre Aufgabe vor dem Lesen</div>
+        <h2>Drei Zeitungen. Drei Schlagzeilen. Welcher kannst du vertrauen?</h2>
+        <p>Diese Woche erreichten unsere Redaktion drei au&szlig;ergew&ouml;hnliche Meldungen aus drei verschiedenen deutschen Zeitungen. Bevor Sie den Artikel unten lesen, sind Sie eingeladen, sich diese Quellen selbst anzuschauen und ein eigenes Urteil zu f&auml;llen.</p>
+        <ul class="quest-steps">
+            <li>
+                <span class="step-num">1</span>
+                <span>Lesen Sie zuerst den Bericht der <a href="1.html" target="_blank">Hallo M&uuml;nchen</a> &uuml;ber ein schweres Zugungl&uuml;ck in Norddeutschland. Klingt der Bericht glaubw&uuml;rdig? Gibt es Quellen, Zeugen, offizielle Stellen?</span>
+            </li>
+            <li>
+                <span class="step-num">2</span>
+                <span>Lesen Sie den Bericht des <a href="2.html" target="_blank">K&uuml;sten-Kurier</a> &uuml;ber einen angeblichen Milit&auml;rschlag der USA gegen Gr&ouml;nland. Was f&auml;llt Ihnen auf? Passt die Geschichte in das, was Sie &uuml;ber die Welt wissen?</span>
+            </li>
+            <li>
+                <span class="step-num">3</span>
+                <span>Lesen Sie den Artikel des <a href="3.html" target="_blank">Ruhr Jugend Report</a> &uuml;ber einen 16-j&auml;hrigen Programmierer aus Gelsenkirchen. Stimmt der Ton? Passen die Zitate zum Gesamtbild?</span>
+            </li>
+        </ul>
+        <p class="quest-warning">&rarr; Erst wenn Sie alle drei Artikel gelesen haben, scrollen Sie weiter und dr&uuml;cken Sie am Ende den Button.</p>
+    </div>
+
+    <hr class="section-rule">
+
+    <h2 class="article-headline">Die Wahrheit ist k&auml;uflich &mdash; und sie kostet nichts</h2>
+    <p class="article-deck">Wie eine k&uuml;nstliche Intelligenz in wenigen Minuten Nachrichten erschafft, die Sie nicht von echten unterscheiden k&ouml;nnen.</p>
+    <div class="article-meta">
+        <span>Von der Redaktion</span>
+        <span>Inland &middot; Digitales &middot; Gesellschaft</span>
+        <span>22. April 2026</span>
+    </div>
+
+    <div class="article-body">
+
+        <p class="dropcap">Sie haben gerade drei Zeitungsartikel gelesen. Einen &uuml;ber einen entgleisten ICE, einen &uuml;ber einen amerikanischen Milit&auml;rschlag gegen Gr&ouml;nland und einen &uuml;ber einen 16-j&auml;hrigen Hacker aus dem Ruhrgebiet. Vielleicht haben Sie bei einer der Geschichten gezweifelt. Vielleicht hat sich eine sofort richtig angef&uuml;hlt. Vielleicht haben Sie bereits eine Vermutung, welche davon wahr ist.</p>
+
+        <p>Dieser Moment des Z&ouml;gerns, dieses Abw&auml;gen zwischen Bauchgef&uuml;hl und Verstand, ist genau das, was diese &Uuml;bung erzeugen sollte. Denn die Mechanismen, die bei Ihnen gerade arbeiten, sind dieselben, die jeden Tag Millionen von Menschen dazu bringen, Falschmeldungen zu glauben, zu teilen und weiterzuverbreiten.</p>
+
+        <div class="article-img">
+            <img src="attachment/92826dd1-285c-4602-a1ae-830a3fdf50ff/ice.png" alt="Entgleister ICE">
+        </div>
+        <p class="img-caption">Ein Bild, das alles zu best&auml;tigen scheint: der entgleiste ICE. Oder tut es das wirklich? &mdash; Foto: Archiv</p>
+
+        <p>Die Geschichte des Zugungl&uuml;cks funktioniert, weil sie vertraut ist. ICE-Unf&auml;lle gibt es. Rettungskr&auml;fte, gesperrte Strecken, unbekannte Opferzahlen &mdash; all das sind Versatzst&uuml;cke, die unser Gehirn sofort in ein glaubw&uuml;rdiges Schema einsortiert. Kein Detail ist so absurd, dass es sofort auffiele. Die Geschichte nutzt unsere Erfahrung mit der Welt, um sich als Teil dieser Welt zu tarnen. Und dennoch: Es gibt keinen verifizierten Bericht, keine offizielle Pressemitteilung der Deutschen Bahn, keine Meldung des Eisenbahn-Bundesamtes. Wer genau sucht, findet &mdash; nichts.</p>
+
+        <div class="pull-quote">
+            <p>&bdquo;Das Gef&auml;hrlichste an einer guten L&uuml;ge ist, dass sie sich genau so anf&uuml;hlt wie eine unbequeme Wahrheit.&ldquo;</p>
+        </div>
+
+        <p>Die Trump-Gr&ouml;nland-Geschichte setzt auf einen anderen Mechanismus: die Plausibilit&auml;t des Exzentrischen. Der Wunsch, Gr&ouml;nland zu kaufen, war 2019 &ouml;ffentlich dokumentiert und weltweit belacht. Ein milit&auml;rischer Schlag klingt absurd, aber f&uuml;r jemanden, dem man vieles zutraut, klingt er weniger absurd. Der Artikel nutzt unsere Vorurteile als Hebel. Und das funktioniert &mdash; weil Vorurteile keine Zufallsprodukte sind, sondern auf echten Erfahrungen beruhen.</p>
+
+        <div class="article-img">
+            <img src="attachment/c074b129-8a17-4ade-94ab-7e2bc1e34b52/file-photo-u-s-president-donald-trump-is-interviewed-by-reuters-at-the-white-house.webp" alt="Trump">
+        </div>
+        <p class="img-caption">Ein bekanntes Gesicht in einem bekannten Kontext: Das Foto allein beweist nichts. &mdash; Foto: Reuters</p>
+
+        <p>Der dritte Artikel, jener &uuml;ber den jungen Programmierer aus Gelsenkirchen, ist von den dreien der hinterh&auml;ltigste. Er basiert auf einer echten Person, einem echten Projekt und echten Zitaten &mdash; die jedoch gezielt aus dem Zusammenhang gerissen wurden. Das Original war eine positive Lokalreportage &uuml;ber einen talentierten Sch&uuml;ler. Die Desinformation hat daraus eine Geschichte &uuml;ber Massen&uuml;berwachung gemacht. Die gef&auml;hrlichste L&uuml;ge ist die, die zu neunzig Prozent wahr ist.</p>
+
+        <div class="article-img">
+            <img src="attachment/d1ed248f-6bf3-4195-96fb-974014266d77/410329282_1762420270_v16_9_1600.webp" alt="Julien am Laptop">
+        </div>
+        <p class="img-caption">Julien Sperling (16) beim Code+Design-Camp an der Hochschule Ruhr-West. &mdash; Foto: Gerd Wallhorn / FUNKE Foto Services</p>
+
+        <hr class="section-rule">
+
+        <p>Eine dieser drei Geschichten hat ein Fundament in der Realit&auml;t. Zwei sind vollst&auml;ndig erfunden. Haben Sie Ihre Entscheidung getroffen?</p>
+
+        <div id="reveal-wrap">
+            <button id="reveal-btn">Aufl&ouml;sung anzeigen</button>
+            <span class="reveal-hint">Nur dr&uuml;cken, wenn Sie sich sicher sind.</span>
+        </div>
+
+        <div id="twist">
+            <p><strong>Alle drei Artikel sind frei erfunden.</strong> Kein ICE ist bei Neustadt entgleist. Die USA haben Gr&ouml;nland nicht angegriffen. Und Julien Sperling ist kein Hacker, sondern ein talentierter junger Entwickler, dessen positives Projekt f&uuml;r diese &Uuml;bung als Vorlage f&uuml;r eine b&ouml;sartige Verdrehung diente.</p>
+            <p>Die drei Zeitungen &mdash; Hallo M&uuml;nchen, Der K&uuml;sten-Kurier, Ruhr Jugend Report &mdash; existieren nicht. Sie wurden f&uuml;r dieses Experiment in wenigen Stunden von einer k&uuml;nstlichen Intelligenz erstellt. Logo, Layout, Schreibstil, Artikeltext, Autorenname, Lesezeit &mdash; alles generiert. Und auch dieser Leitartikel, den Sie gerade lesen, stammt aus derselben Quelle.</p>
+            <p>Das ist die eigentliche Botschaft: Nicht, dass Sie get&auml;uscht wurden. Sondern dass es so einfach war. Und dass es jeden Tag passiert, bei echten Nachrichten, in echten sozialen Netzwerken, mit echten Konsequenzen. Die einzige Verteidigung ist keine App und kein Filter &mdash; sondern die Gewohnheit, zu fragen: <strong>Wer sagt das? Warum? Und woher wei&szlig; ich, dass es stimmt?</strong></p>
+        </div>
+
+    </div>
+
+    <footer>
+        Schulprojekt Medienkompetenz &middot; Code+Design Camp &middot; Hochschule Ruhr-West &middot; 2026
+    </footer>
+
+</div>
+
+<script>
+    document.getElementById('reveal-btn').addEventListener('click', function() {
+        document.getElementById('twist').style.display = 'block';
+        document.getElementById('reveal-wrap').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hallo München – Aktuelle Nachrichten</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #f4f0eb; color: #1a1a1a; }
+
+  /* TOP BAR */
+  .topbar {
+    background: #1a1a1a;
+    color: #ccc;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: #ccc; text-decoration: none; margin-left: 12px; }
+  .topbar a:hover { color: #fff; }
+
+  /* HEADER */
+  header {
+    background: #fff;
+    border-bottom: 4px solid #c8102e;
+    padding: 10px 20px 0 20px;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 8px;
+  }
+  .header-date {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #666;
+  }
+  .logo {
+    text-align: center;
+    flex: 1;
+  }
+  .logo h1 {
+    font-family: 'Georgia', serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #c8102e;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .logo p {
+    font-size: 11px;
+    color: #555;
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-weather {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #444;
+    text-align: right;
+  }
+  .header-weather span {
+    font-size: 22px;
+  }
+
+  /* NAV */
+  nav {
+    background: #c8102e;
+    padding: 0 20px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0;
+  }
+  nav ul li a {
+    display: block;
+    padding: 10px 16px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  nav ul li a:hover, nav ul li a.active {
+    background: #a00d25;
+  }
+
+  /* BREAKING BANNER */
+  .breaking {
+    background: #c8102e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  .breaking-label {
+    background: #fff;
+    color: #c8102e;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  /* MAIN LAYOUT */
+  .main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* EDITION LINE */
+  .edition-line {
+    border-top: 3px double #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    text-align: center;
+    padding: 4px 0;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* GRID */
+  .grid-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .col-left, .col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ARTICLE CARDS */
+  .article-card {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 16px;
+  }
+  .article-card:last-child {
+    border-bottom: none;
+  }
+  .article-card .category {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    color: #c8102e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .article-card h3 {
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #1a1a1a;
+  }
+  .article-card h3 a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .article-card h3 a:hover { color: #c8102e; }
+  .article-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+  }
+  .article-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    margin-bottom: 8px;
+    filter: grayscale(20%);
+  }
+  .article-card .meta {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    color: #888;
+    margin-top: 6px;
+  }
+
+  /* CENTER / MAIN ARTICLE */
+  .main-article {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 0 20px;
+  }
+  .main-article .category {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #c8102e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .main-article h2 {
+    font-size: 36px;
+    line-height: 1.15;
+    font-weight: 900;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    font-family: Georgia, serif;
+  }
+  .main-article .subtitle {
+    font-size: 16px;
+    color: #444;
+    font-style: italic;
+    border-left: 3px solid #c8102e;
+    padding-left: 12px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .main-article .main-img-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .main-article .main-img-wrap img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  .main-article .img-caption {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    color: #666;
+    border-top: 1px solid #ddd;
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+  .main-article .article-body {
+    column-count: 2;
+    column-gap: 20px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #222;
+    text-align: justify;
+  }
+  .main-article .article-body p {
+    margin-bottom: 10px;
+    break-inside: avoid;
+  }
+  .main-article .article-body p:first-child::first-letter {
+    font-size: 48px;
+    float: left;
+    line-height: 0.85;
+    margin: 4px 6px 0 0;
+    font-weight: 900;
+    color: #c8102e;
+    font-family: Georgia, serif;
+  }
+  .main-article .byline {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  .main-article .byline span {
+    color: #c8102e;
+    font-weight: bold;
+  }
+
+  /* PULL QUOTE */
+  .pull-quote {
+    font-size: 18px;
+    font-weight: bold;
+    color: #c8102e;
+    border-top: 2px solid #c8102e;
+    border-bottom: 2px solid #c8102e;
+    padding: 10px 0;
+    margin: 14px 0;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    border: none;
+    border-top: 3px double #1a1a1a;
+    margin: 20px 0;
+  }
+
+  /* BOTTOM STRIP */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    border-top: 3px double #1a1a1a;
+    padding-top: 16px;
+  }
+  .bottom-grid .article-card h3 {
+    font-size: 14px;
+  }
+
+  /* AD STRIP */
+  .ad-strip {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 10px 0;
+    opacity: 0.6;
+  }
+
+  /* SIDEBAR ITEMS */
+  .sidebar-box {
+    background: #f9f5f0;
+    border: 1px solid #ddd;
+    padding: 12px;
+  }
+  .sidebar-box h4 {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c8102e;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+  .sidebar-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .sidebar-box ul li {
+    font-size: 12px;
+    color: #333;
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+  }
+  .sidebar-box ul li:last-child { border-bottom: none; }
+  .sidebar-box ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  .sidebar-box ul li a:hover { color: #c8102e; }
+
+  /* FOOTER */
+  footer {
+    background: #1a1a1a;
+    color: #aaa;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+  }
+  footer .footer-logo {
+    font-size: 24px;
+    font-weight: 900;
+    color: #c8102e;
+    font-family: Georgia, serif;
+    margin-bottom: 8px;
+  }
+  footer p { margin-bottom: 4px; }
+  footer a { color: #aaa; text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div>📍 München, Bayern · Mittwoch, 22. April 2026</div>
+  <div>
+    <a href="#">E-Paper</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Abo</a>
+    <a href="#">Login</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="header-date">
+      <strong>Ausgabe Nr. 94</strong><br>
+      Mittwoch, 22. April 2026
+    </div>
+    <div class="logo">
+      <h1>Hallo München</h1>
+      <p>Die Stimme der Landeshauptstadt · Seit 1948</p>
+    </div>
+    <div class="header-weather">
+      <span>🌥</span><br>
+      12°C · Bedeckt<br>
+      <small style="font-size:10px;color:#888;">München-Mitte</small>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" class="active">Startseite</a></li>
+      <li><a href="#">München</a></li>
+      <li><a href="#">Bayern</a></li>
+      <li><a href="#">Deutschland</a></li>
+      <li><a href="#">Welt</a></li>
+      <li><a href="#">Wirtschaft</a></li>
+      <li><a href="#">Sport</a></li>
+      <li><a href="#">Kultur</a></li>
+      <li><a href="#">Wetter</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- BREAKING -->
+<div class="breaking">
+  <span class="breaking-label">⚡ Eilmeldung</span>
+  Schweres Zugunglück in Norddeutschland – ICE bei Neustadt entgleist · Rettungskräfte im Großeinsatz
+</div>
+
+<!-- MAIN -->
+<div class="main-wrapper">
+
+  <div class="edition-line">Deutschland · Mittwoch, 22. April 2026 · Aktuelle Ausgabe</div>
+
+  <div class="grid-main">
+
+    <!-- LEFT COLUMN -->
+    <div class="col-left">
+      <div class="sidebar-box">
+        <h4>🔥 Meistgelesen</h4>
+        <ul>
+          <li><a href="#">ICE entgleist in Norddeutschland – alle Infos</a></li>
+          <li><a href="#">Münchner Innenring: Neue Spur für Radfahrer ab Mai</a></li>
+          <li><a href="#">Biergärten öffnen früher: Der Sommer kommt nach Bayern</a></li>
+          <li><a href="#">FC Bayern: Krise oder Wende? Analyse nach dem Derby</a></li>
+          <li><a href="#">Mietpreise in München steigen erneut auf Rekordhoch</a></li>
+        </ul>
+      </div>
+
+      <div class="article-card">
+        <div class="category">Bayern</div>
+        <h3><a href="#">Landtag beschließt neues Pflegegesetz – Was ändert sich für Münchner Familien?</a></h3>
+        <p>Das bayerische Parlament hat gestern Abend nach langem Ringen ein überarbeitetes Pflegegesetz verabschiedet.</p>
+        <div class="meta">Von LISA BERGER · 22. Apr. 2026</div>
+      </div>
+
+      <div class="article-card">
+        <div class="category">Wirtschaft</div>
+        <h3><a href="#">BMW plant neue Elektromodelle für 2027 – Produktion in München</a></h3>
+        <p>Der Münchner Automobilhersteller kündigt eine Erweiterung seiner Elektropalette an und sichert damit tausende Arbeitsplätze.</p>
+        <div class="meta">Von THOMAS KLEIN · 22. Apr. 2026</div>
+      </div>
+
+      <div class="article-card">
+        <div class="category">München</div>
+        <h3><a href="#">Oktoberfest-Planungen laufen: Wiesn-Chef bestätigt neue Attraktionen</a></h3>
+        <p>Die Vorbereitungen für das diesjährige Oktoberfest laufen auf Hochtouren. Erstmals wird ein eigener Familien-Bereich eingerichtet.</p>
+        <div class="meta">Von ANNA HUBER · 22. Apr. 2026</div>
+      </div>
+    </div>
+
+    <!-- CENTER / MAIN ARTICLE -->
+    <div class="main-article">
+      <div class="category">🔴 Deutschland – Eilmeldung</div>
+      <h2>ICE entgleist bei Neustadt: Dramatische Szenen nach schwerem Zugunglück</h2>
+      <div class="subtitle">Rettungskräfte im Großeinsatz, Bahnstrecke vollständig gesperrt – Ursache noch unklar</div>
+      <div class="byline">Von <span>MARKUS WEBER</span>, Nachrichtenredaktion · 22. April 2026, 09:14 Uhr</div>
+
+      <div class="main-img-wrap">
+        <img src="ice.png" onerror="this.onerror=null;this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\'><rect width=\'600\' height=\'300\' fill=\'%23222\'/><text x=\'50%\' y=\'50%\' fill=\'%23666\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>📷 Bild: ICE-Unglück bei Neustadt</text></svg>'" alt="ICE nach Entgleisung bei Neustadt" style="width:100%;height:300px;object-fit:cover;">
+        <div class="img-caption">Der verunglückte ICE nach der Entgleisung bei Neustadt – mehrere Waggons sind stark beschädigt. (Foto: dpa)</div>
+      </div>
+
+      <div class="pull-quote">„Die Situation vor Ort ist chaotisch – wir kämpfen um jede Minute."<br><small style="font-size:13px;font-weight:normal;">— Einsatzleiter der Feuerwehr Neustadt</small></div>
+
+      <div class="article-body">
+        <p><strong>MÜNCHEN/NEUSTADT</strong> – Ein schweres Zugunglück erschüttert Deutschland. Am frühen Mittwochmorgen ist ein Intercity-Express der Deutschen Bahn auf der Strecke bei Neustadt in München aus bisher ungeklärter Ursache entgleist. Bilder von der Unfallstelle, die unserem Nachrichtenteam vorliegen, zeigen ein Bild der Verwüstung: Mehrere Waggons des Hochgeschwindigkeitszuges liegen zertrümmert auf und neben den Gleisen.</p>
+        <p>Ersten Berichten zufolge ist der vordere Bereich des ICE gegen eine Betonwand oder einen Brückenpfeiler geprallt. Teile des Zuges stehen schräg auf der Böschung, weiteres Trümmermaterial liegt auf den Gleisbetten verteilt. Über der Unglücksstelle war noch am Vormittag Rauch zu sehen.</p>
+        <p>Ein Großaufgebot an Einsatzkräften ist seit den Morgenstunden vor Ort. Hunderte Helfer von Feuerwehr, Technischem Hilfswerk, Rotem Kreuz und Polizei arbeiten unter Hochdruck daran, die eingeschlossenen Passagiere aus den Trümmern zu befreien. „Die Situation vor Ort ist chaotisch – wir kämpfen um jede Minute", sagte der Einsatzleiter der Feuerwehr Neustadt am Rande des Geschehens.</p>
+        <p>Die genaue Zahl der Verletzten ist noch nicht bekannt. Erste Angaben sprechen von mehreren Dutzend betroffenen Personen, darunter nach Informationen unserer Redaktion auch Schwerverletzte. Notärzte behandeln Betroffene direkt an der Unfallstelle, weitere Rettungshubschrauber wurden angefordert. Ein Krisenstab der Deutschen Bahn wurde einberufen.</p>
+        <p>Die betroffene Bahnstrecke wurde auf unbestimmte Zeit vollständig gesperrt. Experten des Eisenbahn-Bundesamtes (EBA) sind auf dem Weg zur Unfallstelle, um die Ursache des Unglücks zu untersuchen. Ob ein technisches Versagen, ein Hindernis auf den Gleisen oder menschliches Versagen für die Entgleisung verantwortlich ist, ist bisher völlig offen.</p>
+        <p>Die Deutsche Bahn hat eine Notfallhotline für Angehörige eingerichtet. Fahrgäste, die Informationen zu Angehörigen benötigen, werden gebeten, die Nummer <strong>0800 / 996 6330</strong> zu wählen. Alternativ sind Informationen über das DB-Reiseportal verfügbar.</p>
+        <p>Wir berichten weiter und halten Sie über alle Entwicklungen auf dem Laufenden.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-right">
+      <div class="sidebar-box">
+        <h4>📡 Weitere Infos zum Unglück</h4>
+        <ul>
+          <li>DB Notfallhotline: <strong>0800 / 996 6330</strong></li>
+          <li>Strecke gesperrt: Hamburg–Rostock</li>
+          <li>Umleitung: Über Schwerin möglich</li>
+          <li>EBA-Ermittlungen eingeleitet</li>
+          <li>Krisenstab der DB einberufen</li>
+        </ul>
+      </div>
+
+      <div class="article-card">
+        <div class="category">Verkehr</div>
+        <h3><a href="#">Zugausfälle auch in Bayern: Verbindungen nach Hamburg gestrichen</a></h3>
+        <p>Durch die Sperrung der Strecke kommt es laut DB auch an Münchner Bahnhöfen zu erheblichen Verzögerungen und Zugausfällen.</p>
+        <div class="meta">22. Apr. 2026 · 10:02 Uhr</div>
+      </div>
+
+      <div class="article-card">
+        <div class="category">Hintergrund</div>
+        <h3><a href="#">Sicherheit auf deutschen Schienen: Wie oft entgleisen ICE-Züge?</a></h3>
+        <p>Eine Analyse der Unfalldaten des Eisenbahn-Bundesamtes der letzten zehn Jahre zeigt: Schwere Entgleisungen sind selten, aber nicht ausgeschlossen.</p>
+        <div class="meta">22. Apr. 2026</div>
+      </div>
+
+      <div class="article-card">
+        <div class="category">Politik</div>
+        <h3><a href="#">Bundesverkehrsminister kündigt sofortige Überprüfung aller ICE-Flotten an</a></h3>
+        <p>Nach dem schweren Unglück fordert der Bundesminister für Verkehr umgehende Sicherheitschecks an allen aktiven ICE-Garnituren.</p>
+        <div class="meta">22. Apr. 2026 · 11:30 Uhr</div>
+      </div>
+
+      <div class="ad-strip">Anzeige</div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- BOTTOM STRIP -->
+  <div class="bottom-grid">
+    <div class="article-card">
+      <div class="category">München</div>
+      <h3><a href="#">Stadtrat diskutiert Radwegeausbau auf dem Mittleren Ring</a></h3>
+      <p>In der gestrigen Sitzung des Stadtrats entbrannte eine hitzige Debatte über die geplante Umgestaltung des Mittleren Rings.</p>
+      <div class="meta">Von PETRA ZIMMERMANN · 22. Apr. 2026</div>
+    </div>
+    <div class="article-card">
+      <div class="category">Sport</div>
+      <h3><a href="#">FC Bayern nach 2:3 gegen Dortmund unter Druck – Trainer unter Beobachtung</a></h3>
+      <p>Das Clasico-Ergebnis sorgt in der Säbener Straße für Unruhe. Die Vereinsführung soll die Trainerfrage neu bewerten.</p>
+      <div class="meta">Von STEFAN HUBER · 22. Apr. 2026</div>
+    </div>
+    <div class="article-card">
+      <div class="category">Kultur</div>
+      <h3><a href="#">Deutsches Museum eröffnet neue Dauerausstellung zur KI-Geschichte</a></h3>
+      <p>Ab dem 1. Mai können Besucher die Geschichte der Künstlichen Intelligenz von den Anfängen bis heute erleben.</p>
+      <div class="meta">Von CLAUDIA MAYR · 22. Apr. 2026</div>
+    </div>
+    <div class="article-card">
+      <div class="category">Wetter</div>
+      <h3><a href="#">Frühling auf Abruf: Regen und Kälte bis ins Wochenende – dann Aufhellung?</a></h3>
+      <p>Der Deutsche Wetterdienst prognostiziert für München bis Freitag Regen und Temperaturen um 10 Grad. Am Wochenende könnte sich die Sonne durchsetzen.</p>
+      <div class="meta">22. Apr. 2026</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Hallo München</div>
+  <p>Die Stimme der Landeshauptstadt · Seit 1948 · Verlag Münchner Medien GmbH</p>
+  <p>
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">Kontakt</a>
+    <a href="#">Redaktion</a>
+    <a href="#">Mediadaten</a>
+    <a href="#">E-Paper</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Abo</a>
+  </p>
+  <p style="margin-top:10px;font-size:10px;color:#666;">© 2026 Hallo München · Alle Rechte vorbehalten · Nachdruck nur mit Genehmigung der Redaktion</p>
+</footer>
+
+</body>
+</html>

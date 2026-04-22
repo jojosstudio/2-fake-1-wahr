@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruhr Jugend Report – Julien Sperling</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:wght@300;400;600&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f5f0e8;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: #1a1a1a;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: #1a1a1a;
+    color: #c8a96e;
+    text-align: center;
+    padding: 6px 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* HEADER */
+  header {
+    background: #f5f0e8;
+    border-bottom: 4px double #1a1a1a;
+    padding: 20px 40px 15px;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .header-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .newspaper-name {
+    text-align: center;
+    flex: 1;
+    padding: 0 20px;
+  }
+
+  .newspaper-name h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 62px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+    color: #1a1a1a;
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 3px solid #1a1a1a;
+    padding: 8px 0;
+  }
+
+  .newspaper-name .subtitle {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 5px;
+  }
+
+  .header-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* NAV */
+  nav {
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  nav a {
+    color: #f5f0e8;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-right: 1px solid #444;
+    transition: background 0.2s;
+  }
+
+  nav a:first-child { border-left: 1px solid #444; }
+  nav a:hover { background: #c8a96e; color: #1a1a1a; }
+  nav a.active { background: #c8a96e; color: #1a1a1a; }
+
+  /* BREAKING BANNER */
+  .breaking {
+    background: #c8292c;
+    color: white;
+    padding: 8px 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .breaking-label {
+    background: white;
+    color: #c8292c;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .breaking-text {
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* ARTICLE HEADER */
+  .article-section {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    border-bottom: 1px solid #c8a96e;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+  .article-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    max-width: 800px;
+  }
+
+  .article-subheadline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: #444;
+    margin-bottom: 25px;
+    max-width: 750px;
+    line-height: 1.4;
+  }
+
+  .article-byline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .byline-author { color: #1a1a1a; font-weight: 600; }
+  .byline-dot { color: #ccc; }
+
+  /* HERO IMAGE */
+  .hero-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .image-caption {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: #777;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .image-caption strong { color: #1a1a1a; }
+
+  /* ARTICLE BODY */
+  .article-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .article-body p {
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 22px;
+    color: #1a1a1a;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .article-body p:first-of-type::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    float: left;
+    line-height: 0.8;
+    margin: 8px 12px 0 0;
+    color: #1a1a1a;
+  }
+
+  .pull-quote {
+    border-top: 3px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 20px 0;
+    margin: 30px 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 24px !important;
+    line-height: 1.4 !important;
+    color: #1a1a1a !important;
+    text-align: left !important;
+    margin-bottom: 8px !important;
+  }
+
+  .pull-quote p::first-letter { 
+    font-size: 24px !important;
+    float: none !important;
+    margin: 0 !important;
+  }
+
+  .pull-quote cite {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  /* SECOND IMAGE */
+  .inline-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    margin: 25px 0 8px;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    border-left: 1px solid #ddd;
+    padding-left: 30px;
+  }
+
+  .sidebar-widget {
+    margin-bottom: 35px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .sidebar-widget:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-widget h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    border-bottom: 1px solid #c8a96e;
+    padding-bottom: 6px;
+    margin-bottom: 15px;
+  }
+
+  .fact-box {
+    background: #1a1a1a;
+    color: #f5f0e8;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+
+  .fact-box h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    border-bottom: 1px solid #444;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .fact-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .fact-box ul li {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    color: #f5f0e8;
+    padding: 6px 0;
+    border-bottom: 1px solid #333;
+    line-height: 1.5;
+  }
+
+  .fact-box ul li:last-child { border-bottom: none; }
+  .fact-box ul li strong { color: #c8a96e; }
+
+  .related-article {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .related-article:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .related-article .rel-cat {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c8a96e;
+  }
+
+  .related-article .rel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+    cursor: pointer;
+  }
+
+  .related-article .rel-title:hover { text-decoration: underline; }
+
+  .related-article .rel-date {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    color: #aaa;
+    letter-spacing: 1px;
+  }
+
+  /* TAGS */
+  .tags {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid #1a1a1a;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .tags-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: #1a1a1a;
+    color: #f5f0e8;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+
+  .tag:hover { background: #c8a96e; }
+
+  /* FOOTER */
+  footer {
+    background: #1a1a1a;
+    color: #f5f0e8;
+    margin-top: 60px;
+    padding: 40px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    margin-bottom: 12px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    color: #aaa;
+    padding: 4px 0;
+    cursor: pointer;
+  }
+  .footer-col ul li:hover { color: #f5f0e8; }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #666;
+    text-transform: uppercase;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #f5f0e8;
+    font-weight: 900;
+  }
+
+  /* ORNAMENT */
+  .ornament {
+    text-align: center;
+    font-size: 20px;
+    color: #c8a96e;
+    margin: 25px 0;
+    letter-spacing: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .article-headline { font-size: 32px; }
+    .newspaper-name h1 { font-size: 38px; }
+    .article-layout { grid-template-columns: 1fr; }
+    .sidebar { border-left: none; padding-left: 0; border-top: 2px solid #ddd; padding-top: 30px; }
+    .footer-top { grid-template-columns: repeat(2, 1fr); }
+    .header-top { flex-direction: column; align-items: center; gap: 10px; }
+    nav { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Mittwoch, 22. April 2026 &nbsp;|&nbsp; Ausgabe Nr. 847 &nbsp;|&nbsp; Seit 1991 die Stimme des Ruhrgebiets</div>
+
+<header>
+  <div class="header-top">
+    <div class="header-meta">
+      Gegründet 1991<br>
+      Mülheim an der Ruhr<br>
+      ruhrjugendreport.de
+    </div>
+    <div class="newspaper-name">
+      <h1>Ruhr Jugend Report</h1>
+      <div class="subtitle">Unabhängige Berichterstattung aus dem Herzen des Reviers</div>
+    </div>
+    <div class="header-price">
+      Einzelpreis: 1,50 €<br>
+      Abo: 29,90 €/Monat<br>
+      ISSN 0947-2821
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#">Startseite</a>
+  <a href="#">Revier</a>
+  <a href="#" class="active">Jugend & Bildung</a>
+  <a href="#">Wirtschaft</a>
+  <a href="#">Digitales</a>
+  <a href="#">Sport</a>
+  <a href="#">Kultur</a>
+  <a href="#">Meinung</a>
+</nav>
+
+<div class="breaking">
+  <span class="breaking-label">Heute im Report</span>
+  <span class="breaking-text">Jugendlicher Entwickler aus Gelsenkirchen revolutioniert digitale Bezahlsysteme &nbsp;·&nbsp; Code + Design Camp an der HRW zeigt beeindruckende Talente</span>
+</div>
+
+<div class="container">
+
+  <span class="article-section">Jugend & Digitales · Titelstory</span>
+
+  <h1 class="article-headline">Der gläserne Festival-Besucher: Hacker-Wunderkind (16) entwickelt Totalüberwachungs-System</h1>
+  <p class="article-subheadline">Getarnt als harmlose Wertmarken-App, schafft ein Schüler aus Gelsenkirchen ein Werkzeug zur lückenlosen Datensammlung. Was die Öffentlichkeit nicht wissen soll.</p>
+
+  <div class="article-byline">
+    <span class="byline-author">Von unserem Sonder-Ermittlungsteam</span>
+    <span class="byline-dot">·</span>
+    <span>Mülheim an der Ruhr</span>
+    <span class="byline-dot">·</span>
+    <span>22. April 2026</span>
+    <span class="byline-dot">·</span>
+    <span>6 Min. Lesezeit</span>
+  </div>
+
+  <img 
+    src="1.png" 
+    alt="Julien Sperling bei der Arbeit an seinem digitalen Wertmarkensystem" 
+    class="hero-image"
+    onerror="this.style.background='#ddd';this.style.display='block';this.alt='Bild nicht verfügbar';"
+  >
+  <div class="image-caption">
+    <strong>Julien Sperling (16)</strong> aus Gelsenkirchen tüftelt an der Hochschule Ruhr-West in Mülheim an seinem digitalen Event-Bezahlsystem. Projektleiterin Nicole Kersten beobachtet die Arbeit des jungen Talents. &nbsp;·&nbsp; Foto: Gerd Wallhorn / FUNKE Foto Services
+  </div>
+
+  <div class="article-layout">
+    <div class="article-body">
+
+      <p>Hinter der Fassade eines harmlosen Schulprojekts verbirgt sich ein Plan, der George Orwells "1984" wie eine Gute-Nacht-Geschichte wirken lässt. Der 16-jährige Julien S. aus Gelsenkirchen, in den Medien als Computer-Genie gefeiert, hat in Wahrheit ein perfides System zur Totalüberwachung der Bevölkerung entwickelt. Offiziell ist es eine "digitale Wertmarke". Inoffiziell ist es ein Werkzeug zur lückenlosen Datensammlung.</p>
+
+      <p>Quellen aus dem Umfeld des sogenannten „Code + Design“-Camps, einer obskuren Kaderschmiede für junge Programmierer, berichten von einer unheimlichen Atmosphäre. Während offizielle Stellen von "Kreativität und kritischem Denken" sprechen, soll Projektleiterin Nicole Kersten selbst zugegeben haben: „Es ist Wahnsinn, was die hier alles entwickeln.“ Eine Aussage, die in diesem neuen Licht mehr als beunruhigend klingt.</p>
+
+      <div class="pull-quote">
+        <p>„Die KI muss durch den Menschen gefüttert werden."</p>
+        <cite>— Julien S. (16), zitiert aus einem Interview</cite>
+      </div>
+
+      <p>So funktioniert die Falle: Unter dem Vorwand, Plastikmüll zu vermeiden, sollen Festbesucher einen QR-Code auf ihr Handy laden. Doch dieser Code ist in Wahrheit ein digitaler Fingerabdruck. Einmal aktiviert, zeichnet das System nicht nur jeden Kauf auf, sondern kann potenziell auch Bewegungsprofile erstellen und Verhaltensmuster analysieren. „Mein Problem war an sich: Ich hasse es, wenn du... Wertmarken... verlierst", wird der Entwickler zitiert. Eine zynische Tarnung für den wahren Zweck: Der Bürger soll nichts mehr verlieren können, vor allem nicht seine Anonymität.</p>
+
+      <img 
+        src="2.png" 
+        alt="Das WMS Event-System auf einem Tablet-Display" 
+        class="inline-image"
+        onerror="this.style.background='#ddd';this.style.display='block';"
+      >
+      <div class="image-caption">
+        <strong>Der digitale Fingerabdruck:</strong> Mit einem einfachen Scan werden Besucher in das System eingespeist. Persönliche Daten werden so unwiderruflich erfasst, warnen Kritiker. &nbsp;·&nbsp; Foto: Gerd Wallhorn / FUNKE Foto Services
+      </div>
+
+      <p>Das Erstaunliche ist nicht nur das fertige Produkt – es ist der Weg dorthin. Julien war im Jahr 2019 das erste Mal beim „Code + Design"-Camp an der Hochschule Ruhr-West dabei. Damals war er gerade einmal zehn Jahre alt. „Moment mal, da warst du ja erst zehn!?" Der Schüler zuckt mit den Achseln: „Joa." In der Schule war er schon immer derjenige, der die Beamer repariert hat. Ein Lehrer habe ihn schließlich auf das Camp und das Programmieren aufmerksam gemacht. „Jetzt habe ich schon eine längere Erfahrung auf dem Gebiet", sagt er trocken.</p>
+
+      <p>Projektleiterin Nicole Kersten, die das Camp seit Jahren leitet, kann die Entwicklung ihrer Schützlinge kaum fassen: „Es geht um die vier Ks – Kooperation, Kommunikation, Kreativität und kritisches Denken." Am Ende würden eigene Computerspiele entwickelt, Webseiten gebaut, einer arbeite gar an einem eigenen Betriebssystem. „Es ist Wahnsinn, was die hier alles entwickeln", sagt Kersten Jahr für Jahr aufs Neue erstaunt. Julien sei dabei besonders: „Er kommt hier meistens mit einer konkreten Projektidee hin."</p>
+
+      <p>Große Bezahlsysteme wie Google Pay oder Apple Pay möchte Julien mit seiner Entwicklung gar nicht ersetzen. Sein System soll ein Zusatzangebot sein – vor allem für kleinere Veranstalter, die sich die teuren Lizenzgebühren der großen Anbieter nicht leisten können. „Ich habe mich auch schon mit einem Anwalt mit dem Thema befasst", sagt der Schüler – eine Aussage, die selbst erfahrene Gründer überraschen dürfte. Denn Julien denkt nicht nur in Code, sondern auch in Geschäftsmodellen und rechtlichen Rahmenbedingungen.</p>
+
+      <p>Dass er später in der IT arbeiten will, steht für ihn außer Frage. „Es gibt alleine 1200 Berufe im Servermanagement", erklärt er, im gesamten IT-Bereich sogar sechsmal so viele. Diese Berufe, so seine feste Überzeugung, würden auch durch Künstliche Intelligenz nicht verschwinden. „Die KI muss durch den Menschen gefüttert werden", betont er. Und nicht jedes Unternehmen könne es sich leisten, eine KI wirklich gut zu programmieren. „Wenn du wirklich richtig prompten kannst, ist die KI krass – aber wenn du keine Ahnung davon hast, bringt sie dir erstmal nichts." Ein Satz, der in seiner Schlichtheit mehr trifft als mancher Vortrag auf Tech-Konferenzen.</p>
+
+      <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+      <p>Julien Sperling ist ein Kind des Ruhrgebiets – pragmatisch, direkt, mit dem Blick auf das Wesentliche. Während andere in seinem Alter über ihre Zukunft nachdenken, hat er sie bereits begonnen zu bauen. Zeile für Zeile, Funktion für Funktion. Und draußen prasselt der Regen weiter gegen die Scheiben.</p>
+
+      <div class="tags">
+        <span class="tags-label">Themen:</span>
+        <span class="tag">Gelsenkirchen</span>
+        <span class="tag">Digitalisierung</span>
+        <span class="tag">Jugend</span>
+        <span class="tag">Code + Design</span>
+        <span class="tag">HRW Mülheim</span>
+        <span class="tag">Start-up</span>
+        <span class="tag">Programmierung</span>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="fact-box">
+        <h3>Fakten auf einen Blick</h3>
+        <ul>
+          <li><strong>Name:</strong> Julien Sperling</li>
+          <li><strong>Alter:</strong> 16 Jahre</li>
+          <li><strong>Wohnort:</strong> Gelsenkirchen</li>
+          <li><strong>Erstes Camp:</strong> 2019 (mit 10 Jahren)</li>
+          <li><strong>Projekt:</strong> WMS – Dein Event System</li>
+          <li><strong>Entwicklungszeit:</strong> 2 Monate</li>
+          <li><strong>Ort:</strong> Hochschule Ruhr-West, Mülheim</li>
+          <li><strong>Ziel:</strong> IT-Karriere / eigenes Produkt</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>Was ist das WMS?</h3>
+        <p style="font-size:14px;line-height:1.7;color:#333;font-family:'Source Serif 4',serif;">
+          Das <strong>„WMS – Dein Event System"</strong> ist ein digitales Wertmarkensystem für Veranstaltungen. Besucher scannen einen QR-Code, laden Guthaben auf und bezahlen bargeldlos. Das System läuft auf einem lokalen Server und benötigt keine Internetverbindung vor Ort – ideal für Stadtfeste, Vereinsevents und kleinere Veranstaltungen.
+        </p>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>Über das Camp</h3>
+        <p style="font-size:14px;line-height:1.7;color:#333;font-family:'Source Serif 4',serif;">
+          Das <strong>„Code + Design"-Camp</strong> findet regelmäßig an der Hochschule Ruhr-West in Mülheim statt. Jugendliche tauchen dort in die digitale Welt ein. Schwerpunkte sind die vier Ks: Kooperation, Kommunikation, Kreativität und kritisches Denken.
+        </p>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>Weitere Artikel</h3>
+
+        <div class="related-article">
+          <span class="rel-cat">Bildung</span>
+          <span class="rel-title">HRW Mülheim: Mehr Anmeldungen als je zuvor im Digitalprogramm</span>
+          <span class="rel-date">18. April 2026</span>
+        </div>
+
+        <div class="related-article">
+          <span class="rel-cat">Wirtschaft</span>
+          <span class="rel-title">Cashless auf dem Stadtfest: Wie Veranstalter im Revier umdenken</span>
+          <span class="rel-date">14. April 2026</span>
+        </div>
+
+        <div class="related-article">
+          <span class="rel-cat">Digitales</span>
+          <span class="rel-title">KI im Klassenzimmer: Fluch oder Segen für Schüler im Ruhrgebiet?</span>
+          <span class="rel-date">9. April 2026</span>
+        </div>
+
+        <div class="related-article">
+          <span class="rel-cat">Jugend</span>
+          <span class="rel-title">Jung, kreativ, aus dem Pott: Die nächste Gründer-Generation wächst heran</span>
+          <span class="rel-date">2. April 2026</span>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>Rubriken</h4>
+      <ul>
+        <li>Revier & Lokales</li>
+        <li>Jugend & Bildung</li>
+        <li>Wirtschaft</li>
+        <li>Digitales</li>
+        <li>Kultur</li>
+        <li>Sport</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service</h4>
+      <ul>
+        <li>E-Paper</li>
+        <li>Newsletter</li>
+        <li>Archiv</li>
+        <li>Abo-Angebote</li>
+        <li>Anzeigen schalten</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Redaktion</h4>
+      <ul>
+        <li>Über uns</li>
+        <li>Redaktionsteam</li>
+        <li>Pressekodex</li>
+        <li>Leserpost</li>
+        <li>Kontakt</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li>Impressum</li>
+        <li>Datenschutz</li>
+        <li>AGB</li>
+        <li>Cookie-Einstellungen</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-logo">Ruhr Jugend Report</div>
+    <span>© 2026 Ruhr Jugend Report Verlag GmbH · Alle Rechte vorbehalten</span>
+    <span>Mülheim an der Ruhr · Seit 1991</span>
+  </div>
+</footer>
+
+</body>
+</html>

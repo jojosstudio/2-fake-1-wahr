@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Der Küsten-Kurier</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Oswald:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #0a1628;
+    --ocean: #1a3a5c;
+    --wave: #2e6da4;
+    --foam: #e8f4f8;
+    --sand: #f5f0e8;
+    --gold: #c9a84c;
+    --red: #c0392b;
+    --ink: #1a1a2e;
+    --muted: #6b7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--sand);
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+  }
+
+  /* ── HEADER ── */
+  .top-bar {
+    background: var(--navy);
+    color: #aac4dd;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    padding: 6px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar a { color: #aac4dd; text-decoration: none; margin: 0 8px; }
+  .top-bar a:hover { color: #fff; }
+
+  .masthead {
+    background: var(--navy);
+    padding: 28px 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold), var(--wave), var(--gold));
+  }
+
+  .masthead-inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+
+  .logo-block { text-align: left; }
+
+  .logo-wave {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.2rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 0 var(--wave), 4px 4px 0 rgba(46,109,164,0.4);
+  }
+
+  .logo-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    padding-left: 3px;
+  }
+
+  .masthead-right {
+    text-align: right;
+    color: #aac4dd;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+
+  .masthead-right .edition {
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .wave-divider {
+    width: 100%;
+    line-height: 0;
+    background: var(--navy);
+  }
+
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--ocean);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 13px 18px;
+    color: #d0e4f0;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+
+  nav ul li a:hover,
+  nav ul li a.active {
+    color: #fff;
+    border-bottom-color: var(--gold);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── BREAKING ── */
+  .breaking {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 9px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .breaking-label {
+    background: #fff;
+    color: var(--red);
+    padding: 2px 10px;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+    border-radius: 2px;
+  }
+
+  .breaking-text {
+    white-space: nowrap;
+    animation: marquee 22s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ── CONTENT ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 40px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--wave);
+    border-left: 3px solid var(--gold);
+    padding-left: 10px;
+    margin-bottom: 24px;
+  }
+
+  /* ── HERO ARTICLE ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 40px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #c8b99a;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .hero-main {}
+
+  .hero-kicker {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-kicker::before {
+    content: '●';
+    font-size: 0.5rem;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.08;
+    color: var(--navy);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-deck {
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: #3d4f62;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+  }
+
+  .hero-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta span { display: flex; align-items: center; gap: 4px; }
+
+  .hero-img {
+    width: 100%;
+    border-radius: 2px;
+    display: block;
+    margin-bottom: 8px;
+    box-shadow: 4px 4px 20px rgba(0,0,0,0.18);
+    border: 1px solid #c8b99a;
+  }
+
+  .hero-img-caption {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.4;
+    padding-top: 6px;
+    border-top: 1px solid #ddd;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+    line-height: 1.78;
+    color: #2a2a3e;
+    margin-bottom: 16px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .article-body p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    float: left;
+    line-height: 0.8;
+    margin: 6px 10px 0 0;
+    color: var(--navy);
+  }
+
+  .pull-quote {
+    background: var(--navy);
+    color: #fff;
+    padding: 24px 28px;
+    margin: 28px 0;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.4;
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    line-height: 1;
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: #e8f0f8 !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .pull-quote p::first-letter { all: unset !important; }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── SIDEBAR ── */
+  .hero-sidebar {}
+
+  .sidebar-widget {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 3px solid var(--navy);
+    padding: 22px;
+    margin-bottom: 24px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .widget-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .reaction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+  }
+
+  .reaction-item:last-child { border-bottom: none; }
+
+  .reaction-flag {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .reaction-country {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ocean);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .reaction-text {
+    font-size: 0.82rem;
+    color: #444;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .weather-widget {
+    background: linear-gradient(135deg, var(--ocean), var(--navy));
+    border: none;
+    color: #fff;
+    border-top: 3px solid var(--gold);
+  }
+
+  .weather-widget .widget-title { color: var(--gold); border-bottom-color: rgba(255,255,255,0.15); }
+
+  .weather-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .weather-icon { font-size: 3rem; }
+
+  .weather-temp {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .weather-desc {
+    font-size: 0.82rem;
+    color: #aac4dd;
+    margin-top: 2px;
+  }
+
+  .weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: #aac4dd;
+  }
+
+  .weather-details span { display: flex; gap: 4px; align-items: center; }
+
+  /* ── BOTTOM GRID ── */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding-top: 40px;
+  }
+
+  .mini-article {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #c8b99a;
+    position: relative;
+  }
+
+  .mini-article::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--wave);
+  }
+
+  .mini-kicker {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--wave);
+    margin-bottom: 6px;
+  }
+
+  .mini-article h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .mini-article p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .mini-meta {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+
+  /* ── ORNAMENT ── */
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.5rem;
+    letter-spacing: 12px;
+    margin: 32px 0 8px;
+    opacity: 0.5;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: #aac4dd;
+    margin-top: 60px;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 40px 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .footer-tagline {
+    font-size: 0.82rem;
+    color: #7a96ad;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a {
+    color: #aac4dd;
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: #fff; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 16px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: #5a7a8a;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .bottom-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .logo-wave { font-size: 2.8rem; }
+    .hero h1 { font-size: 2.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div>
+    <a href="#">Startseite</a>
+    <a href="#">E-Paper</a>
+    <a href="#">Newsletter</a>
+    <a href="#">Abo</a>
+  </div>
+  <div>Mittwoch, 22. April 2026 &nbsp;|&nbsp; Kiel, 9°C ⛅ &nbsp;|&nbsp; Ausgabe Nr. 4.812</div>
+</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="logo-block">
+      <div class="logo-wave">Der Küsten-Kurier</div>
+      <div class="logo-sub">Schleswig-Holstein · Seit 1948 · Ihre Stimme an der Küste</div>
+    </div>
+    <div class="masthead-right">
+      <div class="edition">SONDERAUSGABE</div>
+      <div>Mittwoch, 22. April 2026</div>
+      <div>Ausgabe Nr. 4.812</div>
+      <div>Preis: 1,90 €</div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 30" preserveAspectRatio="none" height="30">
+    <path d="M0,20 C360,0 720,40 1080,20 C1260,10 1380,25 1440,20 L1440,30 L0,30 Z" fill="#f5f0e8"/>
+  </svg>
+</div>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#" class="active">Startseite</a></li>
+    <li><a href="#">Küstenregion</a></li>
+    <li><a href="#">Politik</a></li>
+    <li><a href="#">Welt</a></li>
+    <li><a href="#">Wirtschaft</a></li>
+    <li><a href="#">Kultur</a></li>
+    <li><a href="#">Sport</a></li>
+    <li><a href="#">Wetter</a></li>
+  </ul>
+</nav>
+
+<!-- BREAKING -->
+<div class="breaking">
+  <span class="breaking-label">⚡ EILMELDUNG</span>
+  <span class="breaking-text">US-Streitkräfte rücken auf Nuuk vor · NATO-Notgipfel einberufen · Dänemark ruft Botschafter aus Washington zurück · Bundesregierung fordert sofortigen Rückzug · UN-Sicherheitsrat tagt in New York</span>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <div class="section-label">Weltpolitik · Sonderberichterstattung</div>
+
+  <div class="hero">
+
+    <!-- LEFT: ARTICLE -->
+    <div class="hero-main">
+      <div class="hero-kicker">Breaking · Weltpolitik · Grönland-Krise</div>
+      <h1>Trump greift Grönland an – die Welt steht am Abgrund</h1>
+      <div class="hero-deck">
+        US-Präsident Donald Trump hat in der Nacht zum Mittwoch den Befehl zu einem Militärschlag gegen Grönland erteilt. NATO-Partner sind entsetzt — Europa steht vor der größten Sicherheitskrise seit dem Zweiten Weltkrieg.
+      </div>
+      <div class="hero-meta">
+        <span>✍ Von Hans-Jürgen Möller, Weltredaktion</span>
+        <span>📅 22. April 2026, 06:14 Uhr</span>
+        <span>⏱ 5 Min. Lesezeit</span>
+        <span>🔄 Laufend aktualisiert</span>
+      </div>
+
+      <img
+        src="d.png"
+        alt="US-Präsident Donald Trump im Oval Office"
+        class="hero-img"
+      />
+      <div class="hero-img-caption">
+        US-Präsident Donald Trump im Oval Office des Weißen Hauses. In der Nacht zum Mittwoch erteilte er den Befehl zum Militärschlag gegen Grönland. &nbsp;© Reuters / Archiv
+      </div>
+
+      <div class="article-body" style="margin-top: 24px;">
+        <p>
+          Es ist ein Paukenschlag, der die gesamte westliche Welt in Schockstarre versetzt: US-Präsident Donald Trump hat in den frühen Morgenstunden des Mittwochs den Befehl erteilt, militärische Kräfte auf Grönland zu entsenden. Amerikanische Marineverbände und Luftlandekräfte haben damit begonnen, strategisch wichtige Punkte auf der Insel zu besetzen — darunter der internationale Flughafen in Nuuk und mehrere Küstenabschnitte im Westen der Insel.
+        </p>
+
+        <div class="pull-quote">
+          <p>„Grönland gehört strategisch zu uns. Wir haben ein faires Angebot gemacht, es wurde ignorant abgelehnt. Jetzt handeln wir."</p>
+          <cite>— Donald Trump, US-Präsident, Pressekonferenz im Oval Office</cite>
+        </div>
+
+        <p>
+          In einer eilig anberaumten Pressekonferenz rechtfertigte Trump den Schritt mit „strategischen Notwendigkeiten für die nationale Sicherheit der Vereinigten Staaten". Er verwies auf die reichen Rohstoffvorkommen Grönlands sowie auf die geopolitisch entscheidende Lage der Insel im Nordatlantik. Bereits 2019 hatte Trump den damals als skurril belächelten Wunsch geäußert, Grönland von Dänemark zu kaufen — nun macht er Ernst.
+        </p>
+
+        <p>
+          Die dänische Regierung in Kopenhagen reagierte mit fassungslosem Entsetzen. Ministerpräsidentin Mette Frederiksen sprach in einer Notfall-Pressekonferenz von einem „barbarischen Angriff auf ein friedliches Land und einen souveränen NATO-Partner". Dänemark hat seinen Botschafter aus Washington zurückgerufen und den amerikanischen Botschafter einbestellt.
+        </p>
+
+        <p>
+          Das westliche Verteidigungsbündnis steht damit vor einer beispiellosen Zerreißprobe. Da Dänemark Mitglied der NATO ist, könnte theoretisch Artikel 5 — der Bündnisfall — ausgelöst werden. Dass jedoch ein NATO-Mitglied ein anderes angreift, ist ein bislang undenkbares Szenario, das die gesamte Architektur des Bündnisses erschüttert. Ein Notgipfel in Brüssel wurde für Donnerstag einberufen.
+        </p>
+
+        <p>
+          Aus Berlin verlautete, dass Bundeskanzler Friedrich Merz den Nationalen Sicherheitsrat einberufen und eine außerordentliche Bundestagssitzung für den Nachmittag angeordnet hat. Deutschland fordert gemeinsam mit Frankreich und den Niederlanden den sofortigen und bedingungslosen Rückzug aller US-Truppen aus grönländischem Gebiet. Der UN-Sicherheitsrat tagt in New York — ein Veto der USA gilt als sicher.
+        </p>
+
+        <p>
+          An der Küste Schleswig-Holsteins verfolgen die Menschen die Entwicklungen mit Bestürzung und wachsender Sorge. „Das ist nicht mehr die Welt, in der ich aufgewachsen bin", sagte uns ein Kieler Passant am frühen Morgen. Der Küsten-Kurier berichtet weiter — laufend und aktuell.
+        </p>
+      </div>
+    </div>
+
+    <!-- RIGHT: SIDEBAR -->
+    <div class="hero-sidebar">
+
+      <div class="sidebar-widget weather-widget">
+        <div class="widget-title">🌊 Wetter · Kiel</div>
+        <div class="weather-main">
+          <div class="weather-icon">⛅</div>
+          <div>
+            <div class="weather-temp">9°C</div>
+            <div class="weather-desc">Wechselhaft, Windböen</div>
+          </div>
+        </div>
+        <div class="weather-details">
+          <span>💨 Wind: 34 km/h SW</span>
+          <span>💧 Regen: 60%</span>
+          <span>🌡 Tief: 6°C</span>
+          <span>🌡 Hoch: 11°C</span>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">🌍 Internationale Reaktionen</div>
+
+        <div class="reaction-item">
+          <div class="reaction-flag">🇩🇰</div>
+          <div>
+            <div class="reaction-country">Dänemark</div>
+            <div class="reaction-text">„Ein Akt der Aggression gegen ein souveränes Land und einen NATO-Partner." — Frederiksen</div>
+          </div>
+        </div>
+
+        <div class="reaction-item">
+          <div class="reaction-flag">🇩🇪</div>
+          <div>
+            <div class="reaction-country">Deutschland</div>
+            <div class="reaction-text">Merz beruft Nationalen Sicherheitsrat ein. Fordert sofortigen Rückzug der US-Truppen.</div>
+          </div>
+        </div>
+
+        <div class="reaction-item">
+          <div class="reaction-flag">🇫🇷</div>
+          <div>
+            <div class="reaction-country">Frankreich</div>
+            <div class="reaction-text">Macron spricht von „Bruch des Völkerrechts" und kündigt Sanktionen an.</div>
+          </div>
+        </div>
+
+        <div class="reaction-item">
+          <div class="reaction-flag">🇬🇧</div>
+          <div>
+            <div class="reaction-country">Großbritannien</div>
+            <div class="reaction-text">London verurteilt den Angriff, hält sich jedoch mit konkreten Maßnahmen zurück.</div>
+          </div>
+        </div>
+
+        <div class="reaction-item">
+          <div class="reaction-flag">🇷🇺</div>
+          <div>
+            <div class="reaction-country">Russland</div>
+            <div class="reaction-text">Kreml nennt die Lage „besorgniserregend" — beobachte die Entwicklung „aufmerksam".</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">📌 Hintergrund: Warum Grönland?</div>
+        <p style="font-size:0.82rem; line-height:1.6; color:#444; margin-bottom:8px;">
+          Grönland beheimatet riesige Vorkommen an Seltenen Erden, Öl und Gas. Die Insel liegt strategisch zwischen Europa und Nordamerika — von enormem militärischem Wert.
+        </p>
+        <p style="font-size:0.82rem; line-height:1.6; color:#444;">
+          Bereits die USA-Airbase Thule (heute Pituffik) zeigt das jahrzehntelange Interesse Washingtons an der Insel.
+        </p>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">📰 Auch interessant</div>
+        <div style="font-size:0.82rem; line-height:1.8; color:#444;">
+          <div style="padding: 8px 0; border-bottom: 1px dashed #eee;">→ <a href="#" style="color: var(--ocean); text-decoration:none;">NATO ruft Notgipfel für Donnerstag ein</a></div>
+          <div style="padding: 8px 0; border-bottom: 1px dashed #eee;">→ <a href="#" style="color: var(--ocean); text-decoration:none;">Grönlands Ministerpräsident spricht von „Okkupation"</a></div>
+          <div style="padding: 8px 0; border-bottom: 1px dashed #eee;">→ <a href="#" style="color: var(--ocean); text-decoration:none;">Bundeswehr erhöht Bereitschaft auf höchste Stufe</a></div>
+          <div style="padding: 8px 0;">→ <a href="#" style="color: var(--ocean); text-decoration:none;">Börsen weltweit brechen ein — DAX verliert 8 %</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ORNAMENT -->
+  <div class="ornament">⚓ ✦ ⚓</div>
+
+  <!-- BOTTOM GRID -->
+  <div class="section-label" style="margin-top:16px;">Weitere Nachrichten</div>
+  <div class="bottom-grid">
+
+    <div class="mini-article">
+      <div class="mini-kicker">Lokal · Kiel</div>
+      <h3>Kieler Hafen rüstet sich: Marine verstärkt Präsenz in der Ostsee</h3>
+      <p>Angesichts der eskalierenden Lage im Nordatlantik hat die Deutsche Marine in Kiel die Bereitschaft ihrer Flotte auf höchste Stufe angehoben. Mehrere Fregatten sollen in den nächsten 48 Stunden auslaufen.</p>
+      <div class="mini-meta">📅 22. April 2026 · ✍ R. Brandt</div>
+    </div>
+
+    <div class="mini-article">
+      <div class="mini-kicker">Wirtschaft</div>
+      <h3>DAX bricht um 8 Prozent ein — Anleger in Panik</h3>
+      <p>Die Finanzmärkte reagieren weltweit mit massiven Kurseinbrüchen auf den US-Angriff. Der DAX verlor kurz nach Handelsöffnung mehr als acht Prozent. Öl- und Gaspreise schießen in die Höhe.</p>
+      <div class="mini-meta">📅 22. April 2026 · ✍ T. Lindemann</div>
+    </div>
+
+    <div class="mini-article">
+      <div class="mini-kicker">Region · Flensburg</div>
+      <h3>Bürger an der Grenze: „Wir haben Angst — was kommt als nächstes?"</h3>
+      <p>In der Grenzregion zu Dänemark herrscht Bestürzung. Viele Flensburger haben Verwandte in Dänemark. Der Küsten-Kurier hat sich umgehört — die Stimmung ist aufgewühlt und voller Ungewissheit.</p>
+      <div class="mini-meta">📅 22. April 2026 · ✍ M. Schröder</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Der Küsten-Kurier</div>
+      <div class="footer-tagline">
+        Ihre unabhängige Tageszeitung für Schleswig-Holstein und die Welt — seit 1948 an Ihrer Seite. Ehrlich. Nah. Verlässlich.
+      </div>
+      <div style="font-family:'Oswald',sans-serif; font-size:0.72rem; color:#5a7a8a; letter-spacing:0.08em;">
+        Redaktion Kiel · Holstenstraße 12 · 24103 Kiel<br>
+        Tel: 0431 / 88 44 00 · redaktion@kuestenkurier.de
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Rubriken</h4>
+      <ul>
+        <li><a href="#">Küstenregion</a></li>
+        <li><a href="#">Politik</a></li>
+        <li><a href="#">Welt</a></li>
+        <li><a href="#">Wirtschaft</a></li>
+        <li><a href="#">Kultur</a></li>
+        <li><a href="#">Sport</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Service</h4>
+      <ul>
+        <li><a href="#">E-Paper</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Abo bestellen</a></li>
+        <li><a href="#">Archiv</a></li>
+        <li><a href="#">Stellenanzeigen</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <ul>
+        <li><a href="#">Impressum</a></li>
+        <li><a href="#">Datenschutz</a></li>
+        <li><a href="#">AGB</a></li>
+        <li><a href="#">Mediadaten</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Der Küsten-Kurier Verlag GmbH · Alle Rechte vorbehalten</span>
+    <span>⚓ Kiel · Schleswig-Holstein · Deutschland</span>
+  </div>
+</footer>
+
+</body>
+</html>
