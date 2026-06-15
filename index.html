@@ -398,6 +398,228 @@
             line-height: 1.6;
         }
 
+        /* ── ALLGEMEINE FAKE-NEWS-CHECKLISTE ── */
+        .guide-section {
+            margin-bottom: 40px;
+        }
+
+        .guide-section > h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .guide-section > p {
+            text-align: center;
+            font-size: 0.92rem;
+            color: #666;
+            max-width: 680px;
+            margin: 0 auto 32px;
+            line-height: 1.7;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .guide-card {
+            border: 1px solid #ddd;
+            background: #fffdf7;
+            overflow: hidden;
+        }
+
+        .guide-card-header {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #1a1a1a;
+        }
+
+        .guide-card-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .guide-card-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .guide-card-header .guide-card-sub {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c9b47f;
+            margin-top: 2px;
+        }
+
+        .guide-card-body {
+            padding: 18px 20px;
+        }
+
+        .guide-card-body h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c9b47f;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .guide-card-body ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 16px;
+        }
+
+        .guide-card-body ul li {
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.6;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            border-bottom: 1px dashed #f0ede6;
+        }
+
+        .guide-card-body ul li:last-child {
+            border-bottom: none;
+        }
+
+        .guide-card-body ul li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: #c9b47f;
+            font-size: 0.85rem;
+        }
+
+        .guide-card-body ul li strong {
+            color: #1a1a1a;
+        }
+
+        .guide-danger {
+            background: #fdf5f5;
+            border-top: 1px solid #f0dede;
+            padding: 14px 20px;
+        }
+
+        .guide-danger h4 {
+            color: #b54a4a;
+            border-bottom-color: #f0dede;
+        }
+
+        .guide-danger ul li::before {
+            content: '⚠';
+            color: #b54a4a;
+            font-size: 0.7rem;
+        }
+
+        .guide-solution {
+            background: #f5f9f5;
+            border-top: 1px solid #dde8dd;
+            padding: 14px 20px;
+        }
+
+        .guide-solution h4 {
+            color: #4a8a4a;
+            border-bottom-color: #dde8dd;
+        }
+
+        .guide-solution ul li::before {
+            content: '✓';
+            color: #4a8a4a;
+            font-size: 0.85rem;
+        }
+
+        /* ── GENERAL 10-STEP CHECKLIST ── */
+        .ten-steps {
+            border: 2px solid #1a1a1a;
+            padding: 30px 34px;
+            margin-bottom: 40px;
+            position: relative;
+            background: #fffdf7;
+        }
+
+        .ten-steps-label {
+            position: absolute;
+            top: -14px;
+            left: 28px;
+            background: #1a1a1a;
+            color: #c9b47f;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+        }
+
+        .ten-steps h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+
+        .ten-steps > p {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .ten-steps-list {
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .ten-steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .ten-steps-list li::before {
+            counter-increment: steps;
+            content: counter(steps);
+            background: #1a1a1a;
+            color: #c9b47f;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ten-steps-list li strong {
+            color: #1a1a1a;
+        }
+
         /* ── SECTION DIVIDER ── */
         .section-rule {
             border: none;
@@ -844,6 +1066,246 @@
         <div class="arbeitsaufgaben-note">
             <strong>Tipp:</strong> F&uuml;hren Sie ein kleines Schreibheft oder ein digitales Dokument, in dem Sie Ihre Beobachtungen zu jedem Artikel festhalten. Dieses dient sp&auml;ter als Grundlage f&uuml;r die Gruppendiskussion.
         </div>
+    </div>
+
+    <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+    <!-- ═══════════════ ALLGEMEINE FAKE-NEWS-CHECKLISTE ═══════════════ -->
+    <div class="guide-section">
+
+        <h2>Fake News erkennen &mdash; in allen Formaten</h2>
+        <p>Fake News sind nicht nur in Zeitungen zu finden. Sie lauern in Instagram-Posts, YouTube-Videos, Podcasts und Telegram-Kanälen. Hier finden Sie eine &uuml;bersicht, worauf Sie in jedem Format achten sollten &mdash; mit Gefahren, Warnsignalen und konkreten L&ouml;sungen.</p>
+
+        <!-- ── 2x2 GRID: FORMAT-KARTEN ── -->
+        <div class="guide-grid">
+
+            <!-- 🗞 ZEITUNG / NACHRICHTENARTIKEL -->
+            <div class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🗞️</div>
+                    <div>
+                        <h3>Zeitung / Nachrichtenartikel</h3>
+                        <div class="guide-card-sub">Print & Online</div>
+                    </div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Warnsignale erkennen</h4>
+                    <ul>
+                        <li><strong>Kein Impressum</strong> oder nur vage Kontaktdaten (keine echte Redaktion)</li>
+                        <li><strong>Keine namentlichen Quellen</strong> &mdash; nur &bdquo;Experten sagen&ldquo; oder &bdquo;man berichtet&ldquo;</li>
+                        <li><strong>Kein Erscheinungsort</strong>, kein Redakteurname, keine Verantwortlicher Person</li>
+                        <li><strong>Emotionaler Sprachgebrauch</strong>: &bdquo;skandal&ouml;s&ldquo;, &bdquo;erschreckend&ldquo;, &bdquo;ungeheuerlich&ldquo; im Titel</li>
+                        <li><strong>Aufgeblasene Schlagzeilen</strong>, die den Artikel nicht halten k&ouml;nnen</li>
+                        <li><strong>Fehlende Verifizierung</strong>: Kein anderer Berichterstatter best&auml;tigt die Meldung</li>
+                    </ul>
+                    <div class="guide-danger">
+                        <h4>⚠ Gefahren</h4>
+                        <ul>
+                            <li>Gef&auml;lschte Zeitungsseiten imitiren den Look seri&ouml;ser Verlage</li>
+                            <li>Bilder werden aus anderen Kontexten wiederverwendet</li>
+                            <li>AI-generierte Artikel k&ouml;nnen heute fast echt aussehen</li>
+                        </ul>
+                    </div>
+                    <div class="guide-solution">
+                        <h4>✓ L&ouml;sungen</h4>
+                        <ul>
+                            <li><strong>Impressum pr&uuml;fen</strong> &mdash; Wer steckt dahinter? Stimmt die Adresse?</li>
+                            <li><strong>Quellen kreuzpr&uuml;fen</strong> &mdash; Gibt es denselben Bericht bei Tagesschau, ZDF, Reuters?</li>
+                            <li><strong>Bilder r&uuml;ckw&auml;rts suchen</strong> (Google Bilder, TinEye) &mdash; Woher stammt das Foto?</li>
+                            <li><strong>Faktencheck-Portale nutzen</strong> (Correctiv, AFP Fact Check, mimikama)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📱 INSTAGRAM / SOZIALE NETZWERKE -->
+            <div class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">📱</div>
+                    <div>
+                        <h3>Instagram / Soziale Netzwerke</h3>
+                        <div class="guide-card-sub">Social Media Posts & Stories</div>
+                    </div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Warnsignale erkennen</h4>
+                    <ul>
+                        <li><strong>Kein Quellenverweis</strong> &mdash; Behauptungen ohne Link zur Originalquelle</li>
+                        <li><strong>Screenshots von Screenshots</strong> &mdash; Kein direkter Zugriff auf die Originalmeldung</li>
+                        <li><strong>Klickbait-Titel</strong>: &bdquo;Was sie Ihnen verschweigen!&ldquo; oder &bdquo;Die Wahrheit!&ldquo;</li>
+                        <li><strong>Bewusst emotionale Bilder</strong> oder provokante Grafiken, die zum Teilen anregen</li>
+                        <li><strong>Autor ist kein verifizierter Journalist</strong> &mdash; nur &bdquo;Investigator&ldquo; oder &bdquo;Analyzer&ldquo;</li>
+                        <li><strong>Datum fehlt oder ist veraltet</strong> &mdash; alter Inhalt wird als aktuell geteilt</li>
+                    </ul>
+                    <div class="guide-danger">
+                        <h4>⚠ Gefahren</h4>
+                        <ul>
+                            <li>Algorithmen bevorzugen emotionale Inhalte &mdash; Falschmeldung verbreitet sich schneller</li>
+                            <li>Stories verschwinden nach 24 Stunden &mdash; Meldung ist nicht archiviert</li>
+                            <li>&bdquo;Screenshot-Kultur&ldquo; macht R&uuml;ckverfolgung schwierig</li>
+                        </ul>
+                    </div>
+                    <div class="guide-solution">
+                        <h4>✓ L&ouml;sungen</h4>
+                        <ul>
+                            <li><strong>Nicht sofort teilen</strong> &mdash; Erst pr&uuml;fen, dann sharen</li>
+                            <li><strong>Profil des Autors pr&uuml;fen</strong> &mdash; Wer ist das? Was ist seine Absicht?</li>
+                            <li><strong>Originalquelle suchen</strong> &mdash; Gibt es den Post auch bei seri&ouml;sen Accounts?</li>
+                            <li><strong>Sentiment-Analyse</strong>: F&uuml;hlt sich der Text nach Angst, Wut oder Aufregung an? Das ist Absicht.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎙 PODCAST -->
+            <div class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🎙️</div>
+                    <div>
+                        <h3>Podcast</h3>
+                        <div class="guide-card-sub">Audio-Inhalte & Sendungen</div>
+                    </div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Warnsignale erkennen</h4>
+                    <ul>
+                        <li><strong>Keine Quellenangaben</strong> im Shownotes oder in der Folge selbst</li>
+                        <li><strong>Nur eine Perspektive</strong> &mdash; keine Gegenpositionen oder Gegendarstellungen</li>
+                        <li><strong>Autorit&auml;rer Sprecher</strong>, der sich als &bdquo;unabh&auml;ngig&ldquo; oder &bdquo;Mainstream-kritisch&ldquo; positioniert</li>
+                        <li><strong>Verschw&ouml;rungssprache</strong>: &bdquo;Sie wollen uns alle controllen&ldquo;, &bdquo;Der Staat l&uuml;gt&ldquo;</li>
+                        <li><strong>Gef&uuml;hltes Vertrauen</strong>: Persoenliche Geschichten, die rational argumentieren ersetzen</li>
+                        <li><strong>Keine Richtigstellungen</strong> &mdash; Fehler werden nie korrigiert oder eingeordnet</li>
+                    </ul>
+                    <div class="guide-danger">
+                        <h4>⚠ Gefahren</h4>
+                        <ul>
+                            <li>Podcast-H&ouml;rer vertrauen dem Sprecher oft wie einem Freund</li>
+                            <li>60 Minuten Audio sind schwer zu verifizieren &mdash; im Gegensatz zu einem kurzen Text</li>
+                            <li>Keine m&ouml;gliche Gegenreaktion &mdash; der H&ouml;rer kann nicht &bdquo;kommentieren&ldquo;</li>
+                        </ul>
+                    </div>
+                    <div class="guide-solution">
+                        <h4>✓ L&ouml;sungen</h4>
+                        <ul>
+                            <li><strong>Shownotes pr&uuml;fen</strong> &mdash; Gibt es Quellenverweise? F&uuml;hren diese zu echten Studien?</li>
+                            <li><strong>Gegenh&ouml;rer finden</strong> &mdash; Gibt es einen Podcast mit anderer Position zum selben Thema?</li>
+                            <li><strong>Gast-Expertise pr&uuml;fen</strong> &mdash; Ist der Gast wirklich Experte oder nur &bdquo;Meinungsexperte&ldquo;?</li>
+                            <li><strong>Faktencheck-Tools nutzen</strong> und die Behauptungen einzeln nachschlagen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎬 VIDEO / YOUTUBE / TIKTOK -->
+            <div class="guide-card">
+                <div class="guide-card-header">
+                    <div class="guide-card-icon">🎬</div>
+                    <div>
+                        <h3>Video (YouTube / TikTok)</h3>
+                        <div class="guide-card-sub">Video-Inhalte & Shorts</div>
+                    </div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Warnsignale erkennen</h4>
+                    <ul>
+                        <li><strong>Kein Kontext</strong> &mdash; Bilder werden ohne Zeitangabe oder Ereignis gezeigt</li>
+                        <li><strong>Ausschnitte ohne Zusammenhang</strong> &mdash; Redner werden bewusst falsch zitiert</li>
+                        <li><strong>Emotionale Musik</strong> oder Dramatisierung im Hintergrund</li>
+                        <li><strong>Kommentarsektion als &bdquo;Beweis&rdquo;</strong> &mdash; &bdquo;Schauen Sie sich die Kommentare an!&ldquo;</li>
+                        <li><strong>Deepfakes & KI-generierte Bilder</strong> &mdash; Gesichter und Stimmen k&ouml;nnen gef&auml;lscht werden</li>
+                        <li><strong>Kein Datum</strong> &mdash; Altes Video wird als aktuell pr&auml;sentiert</li>
+                    </ul>
+                    <div class="guide-danger">
+                        <h4>⚠ Gefahren</h4>
+                        <ul>
+                            <li>Video ist das glaubw&uuml;rdigste Medium &mdash; &bdquo;Wenn ich es sehe, muss es stimmen&ldquo;</li>
+                            <li>Deepfakes und KI-generierte Videos werden immer besser und schwerer erkennbar</li>
+                            <li>TikTok-Kurzformate erlauben keine tiefe Auseinandersetzung</li>
+                        </ul>
+                    </div>
+                    <div class="guide-solution">
+                        <h4>✓ L&ouml;sungen</h4>
+                        <ul>
+                            <li><strong>Bildersuche nutzen</strong> &mdash; Woher stammt das gezeigte Bildmaterial?</li>
+                            <li><strong>Auf Deepfake-Anzeichen achten</strong>: unnat&uuml;rliche Bewegungen, Blitzen im Gesicht, Lippen-Synchronisationsprobleme</li>
+                            <li><strong>Kanal-Info pr&uuml;fen</strong> &mdash; Wie alt ist der Kanal? Wie viele Abonnenten? Was ist die Historie?</li>
+                            <li><strong>Nur einen Ausschnitt nicht vertrauen</strong> &mdash; Das volle Video anschauen oder die Originalquelle suchen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── 10 SCHRITTE: ALLGEMEINE CHECKLISTE ── -->
+        <div class="ten-steps">
+            <div class="ten-steps-label">📋 10-Schritte-Checkliste</div>
+            <h2>So pr&uuml;fen Sie jede Nachricht &mdash; in jedem Format</h2>
+            <p>Egal ob Zeitung, Instagram-Post, Podcast-Folge oder YouTube-Video &mdash; mit diesen zehn Schritten k&ouml;nnen Sie jede Meldung systematisch hinterfragen.</p>
+
+            <ol class="ten-steps-list">
+                <li>
+                    <div><strong>Quelle identifizieren:</strong> Wer sagt das? Ist es ein verifizierter Journalist, eine Nachrichtenagentur oder eine unbekannte Person? Hat die Quelle eine nachvollziehbare Historie?</div>
+                </li>
+                <li>
+                    <div><strong>Impressum & Autoreninfo pr&uuml;fen:</strong> Gibt es ein Impressum? Stimmt die Adresse? Ist der Autor namentlich genannt und &uuml;bersuchbar? Fehlen diese Informationen, ist das ein Warnsignal.</div>
+                </li>
+                <li>
+                    <div><strong>Kreuzverweis mit anderen Medien:</strong> Berichten Tagesschau, ZDF, Reuters, dpa oder andere etablierte Medien dasselbe? Eine Meldung, die nur bei einer einzigen Quelle erscheint, ist verd&auml;chtig.</div>
+                </li>
+                <li>
+                    <div><strong>Bilder und Videos verifizieren:</strong> Nutzen Sie Google Bilder, TinEye oder InVID (f&uuml;r Videos), um zu pr&uuml;fen, woher das Material stammt. Bilder werden h&auml;ufig aus anderen Kontexten wiederverwendet.</div>
+                </li>
+                <li>
+                    <div><strong>Datum pr&uuml;fen:</strong> Wann wurde die Meldung ver&ouml;ffentlicht? Wird ein altes Ereignis als aktuell dargestellt? Zeitliche Verzerrung ist eine h&auml;ufige Methode der Desinformation.</div>
+                </li>
+                <li>
+                    <div><strong>Sprache und Tonfall analysieren:</strong> Nutzt der Text &uuml;bertrieben emotionale Begriffe (&bdquo;skandal&ouml;s&ldquo;, &bdquo;ersch&uuml;tternd&ldquo;, &bdquo;geheim&ldquo;)? Seri&ouml;se Berichterstattung ist in der Regel n&uuml;chtern und sachlich.</div>
+                </li>
+                <li>
+                    <div><strong>Logik und Plausibilit&auml;t pr&uuml;fen:</strong> Passt die Geschichte in das, was Sie &uuml;ber die Welt wissen? W&uuml;rde ein solches Ereignis nicht automatisch in allen Nachrichten erscheinen?</div>
+                </li>
+                <li>
+                    <div><strong>Zitate und Kontext pr&uuml;fen:</strong> Wurden Zitate aus dem Zusammenhang gerissen? Ver&auml;ndert sich die Aussage, wenn man das volle Zitat liest? Zitat-F&auml;lschung ist eine der h&auml;ufigsten Desinformations-Techniken.</div>
+                </li>
+                <li>
+                    <div><strong>Emotionen als Warnsignal nehmen:</strong> Wenn eine Meldung Wut, Angst oder Emp&ouml;rung ausl&ouml;st, sollten Sie besonders aufmerksam sein. Emotionale Reaktionen werden bewusst provoziert, um rationales Denken auszuschalten.</div>
+                </li>
+                <li>
+                    <div><strong>Faktencheck-Portale nutzen:</strong> Pr&uuml;fen Sie bei Correctiv, AFP Fact Check, mimikama oder dem Recherche-Netzwerk, ob die Meldung bereits als Falschmeldung eingestuft wurde. Nutzen Sie auch das BFDF (Bundesverband Digitaler Journalismus).</div>
+                </li>
+            </ol>
+        </div>
+
+        <!-- ── GEFÄHREN & LÖSUNGEN ÜBERSICHT ── -->
+        <div class="ten-steps">
+            <div class="ten-steps-label">⚖️ Gefahren & L&ouml;sungen</div>
+            <h2>Warum ist Fake News gef&auml;hrlich &mdash; und was k&ouml;nnen Sie tun?</h2>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="font-family: 'Oswald', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #b54a4a; margin-bottom: 10px;">⚠ Die gro&szlig;en Gefahren</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #f0ede6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #b54a4a; font-size: 0.75rem;">→</span> <strong>Demokratie:</strong> Desinformation untergr&auml;bt das Vertrauen in demokratische Institutionen, Wahlen und free Press</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #f0ede6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #b54a4a; font-size: 0.75rem;">→</span> <strong>Gesellschaft:</strong> Fake News spalten Communities und schaffen Feindbilder zwischen Gruppen</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #f0ede6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #b54a4a; font-size: 0.75rem;">→</span> <strong>Gesundheit:</strong> Falsche Gesundheitsinformation k&ouml;nnen zu gef&auml;hrlichen Entscheidungen f&uuml;hren (Impfungen, Medikamente)</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #f0ede6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #b54a4a; font-size: 0.75rem;">→</span> <strong>Pers&ouml;nlich:</strong> Wer Falschmeldungen glaubt und teilt, verliert eigene Glaubw&uuml;rdigkeit und kann andere sch&auml;digen</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #b54a4a; font-size: 0.75rem;">→</span> <strong>KI-generierte Fake News:</strong> Durch K&uuml;nstliche Intelligenz k&ouml;nnen Fake News in wenigen Minuten in gro&szlig;er Menge erstellt werden &mdash; inklusive realistischer Fotos, Videos und Audio</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="font-family: 'Oswald', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #4a8a4a; margin-bottom: 10px;">✓ Ihre L&ouml;sungen & Handlungsoptionen</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #e6f0e6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Slow down:</strong> Nicht sofort teilen. Atmen Sie durch. Emotionale Meldungen brauchen besondere Vorsicht.</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #e6f0e6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Quellen vergleichen:</strong> Mindestens drei seri&ouml;se Quellen konsultieren, bevor eine Information als wahr akzeptiert wird.</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #e6f0e6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Faktencheck-Tools kennen:</strong> Correctiv, AFP Fact Check, mimikama, InVID &mdash; bookmarken und regular nutzen.</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #e6f0e6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Medienkompetenz st&auml;rken:</strong> Regelm&auml;&szlig;ig mit anderen &uuml;ber Nachrichten sprechen. Der Austausch sch&uuml;rft das Urteilsverm&ouml;gen.</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; border-bottom: 1px dashed #e6f0e6; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Eigene Bias kennen:</strong> Jeder hat Vorurteile. Fragen Sie sich: &bdquo;Glaube ich das, weil es wahr ist &mdash; oder weil es meinem Weltbild entspricht?&ldquo;</li>
+                    <li style="font-size: 0.9rem; color: #444; padding: 8px 0; padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: #4a8a4a; font-size: 0.85rem;">✓</span> <strong>Korrektur mutig kommunizieren:</strong> Wenn Sie Fehler verbreitet haben, korrigieren Sie das &ouml;ffentlich. Das st&auml;rkt Vertrauen und schw&auml;cht Desinformation.</li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
